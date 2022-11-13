@@ -1,0 +1,124 @@
+--find out minishift console
+
+minishift console --url
+
+-- login to openshift cluster using default credentials
+
+oc login https://<IP>:8443 -u system:admin
+
+--once logged in, list of projects to which the id has access to is displayed. the current project will be indicated by a * and a comment 'Using project "<project_name>" '
+
+--create a new project 
+
+oc new-project <project_name>
+
+--display all projects to which the user has access to, current project will be indicated by "*"
+
+oc get projects
+
+-- to see the pods under the current project 
+
+oc get pods
+
+-- to see the deployments under the current project
+
+oc get deploy
+
+-- get build configuration
+
+oc get bc
+
+-- build new app through code in github url
+
+oc new-app <git_url>.git
+
+--once the above command is executed, build config is visible because  s2i is built from git
+
+oc get bc
+
+-- check deployment
+
+oc get deploy
+--above command does nothing till deployment is done
+
+--get deployment config status shows properties along with triggers
+
+oc get dc
+
+--to get logs of build config, use below command
+
+oc logs -f bc/<build_config_name>
+
+--to get the oc environment
+
+minishift oc-env
+
+-- to get pod status
+
+oc get pods
+
+--get service status
+
+oc get svc
+
+--expose service to outside world
+
+oc expose svc/<service_name>
+
+-- show route shows dns url
+
+oc get route
+
+--oc describe shows in detail of resources
+
+oc describe pods <pod_name>
+
+oc describe svc <service_name>
+
+-- get details of rc
+
+oc get rc
+
+-- after a code change in git repository, bc needs to be rerun to reflect the code changes in to the image to create the pods
+
+oc get bc <build_name>
+
+
+--whenever there is a change in image used to launch pod, dc will retrigger because a trigger is set in dc. this is done automatically
+
+oc get dc -- revision number tells the version
+
+-- describe the dc
+
+oc describe dc <dc_name>
+
+--in the output of above(^) command, the strategy value tells whether its a rolling update. In rolling update, new pods are launched, existing customers are moved to new pods and then only older pods are terminated
+
+
+--once a code is changed in github, to reflect the changes in the end-user url, all the operator has to do is a new build and deployment automatically gets triggered whenever a new source image is available
+
+oc start-build <build_name>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
