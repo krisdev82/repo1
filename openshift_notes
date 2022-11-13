@@ -99,6 +99,25 @@ oc describe dc <dc_name>
 
 oc start-build <build_name>
 
+--list secrets
+
+oc get secrets
+
+-- get templates
+
+oc get templates
+
+-- openshift is a default project by openshift on the oc
+
+-- below command gets the template list from openshift project
+
+oc get templates -n openshift
+
+--launch an app using a template
+
+oc new-app cakephp-mysql-persistent
+
+
 
 
 
